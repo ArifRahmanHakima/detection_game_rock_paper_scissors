@@ -1,0 +1,102 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="webcam.js"></script>
+<script src="rps-dataset.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+    }
+
+    #camera-frame {
+        display: inline-block;
+        border: 4px solid #4CAF50;
+        border-radius: 10px;
+        margin: 20px auto;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    video {
+        border: 2px solid #000; /* Border untuk webcam */
+        border-radius: 10px;    /* Membuat sudut melengkung */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan untuk video */
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        border: 2px solid #000000; /* Border hijau untuk tombol */
+        border-radius: 5px;
+        background-color: #fd0000; /* Tombol putih */
+        color: #fefefe;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, color 0.3s; /* Efek hover */
+    }
+
+    button:hover {
+        background-color: #4CAF50; /* Hijau saat dihover */
+        color: white; /* Teks putih */
+    }
+
+    .sample-box {
+        display: inline-block;
+        width: 250px;
+        padding: 10px;
+        margin: 10px;
+        border: 2px solid #000; /* Border hitam untuk kotak sample */
+        border-radius: 10px;
+        background-color: #fff; /* Latar belakang putih */
+        text-align: left; /* Konten rata kiri */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan */
+    }
+
+    #prediction {
+        border: 2px dashed #000;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px auto;
+        width: 50%;
+        background-color: #fff;
+    }
+
+    #dummy {
+        margin: 20px auto;
+        font-size: 14px;
+        color: #555;
+    }
+</style>
+</head>
+<body>
+	<div>
+		<div>
+			<video autoplay playsinline muted id="wc" width="224" height="224"></video>
+		</div>
+	</div>
+	<button type="button" id="0" onclick="handleButton(this)" >Rock</button>
+	<button type="button" id="1" onclick="handleButton(this)" >Paper</button>
+	<button type="button" id="2" onclick="handleButton(this)" >Scissors</button>
+	<button type="button" id="3" onclick="handleButton(this)" >Spock</button>
+	<button type="button" id="4" onclick="handleButton(this)" >Lizard</button>
+	<div class="sample-box" id="rocksamples">Rock Samples:</div>
+	<div class="sample-box" id="papersamples">Paper Samples:</div>
+	<div class="sample-box" id="scissorssamples">Scissors Samples:</div>
+	<div class="sample-box" id="spocksamples">Spock Samples:</div>
+	<div class="sample-box" id="lizardsamples">Lizard Samples:</div>
+	<button type="button" id="train" onclick="doTraining()" >Train Network</button>
+	<div id="dummy">Once training is complete, click 'Start Predicting' to see predictions, and 'Stop Predicting' to end. Once you are happy with your model, click 'Download Model' to save the model to your local disk.</div>
+	<button type="button" id="startPredicting" onclick="startPredicting()" >Start Predicting</button>
+	<button type="button" id="stopPredicting" onclick="stopPredicting()" >Stop Predicting</button>
+    <button type="button" id="saveModel" onclick="saveModel()" >Download Model</button>
+	<div id="prediction"></div>
+</body>
+
+<script src="detection_uji.js"></script>
+<!-- <script src="C1_W4_Assignment_Solution.js"></script> -->
+</html>
